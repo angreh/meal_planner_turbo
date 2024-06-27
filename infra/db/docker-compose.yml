@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  nmp-postgres:
+    container_name: nmp-postgres
+    image: "postgres:14.2"
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: meal_planner
+    volumes:
+      - ./db-data/:/var/lib/postgresql/data/
