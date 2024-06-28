@@ -1,0 +1,204 @@
+{
+  "id": "03f887c3-8a14-41d0-8222-180c52d3f973",
+  "prevId": "efc77b05-5519-4092-a32a-26c0cff30770",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.ingredients": {
+      "name": "ingredients",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.meals": {
+      "name": "meals",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "title": {
+          "name": "title",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.plans": {
+      "name": "plans",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "date_start": {
+          "name": "date_start",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "date_end": {
+          "name": "date_end",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.ingredients_to_meals": {
+      "name": "ingredients_to_meals",
+      "schema": "",
+      "columns": {
+        "ingredient_id": {
+          "name": "ingredient_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "meal_id": {
+          "name": "meal_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "ingredients_to_meals_ingredient_id_ingredients_id_fk": {
+          "name": "ingredients_to_meals_ingredient_id_ingredients_id_fk",
+          "tableFrom": "ingredients_to_meals",
+          "tableTo": "ingredients",
+          "columnsFrom": [
+            "ingredient_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "ingredients_to_meals_meal_id_meals_id_fk": {
+          "name": "ingredients_to_meals_meal_id_meals_id_fk",
+          "tableFrom": "ingredients_to_meals",
+          "tableTo": "meals",
+          "columnsFrom": [
+            "meal_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "ingredients_to_meals_ingredient_id_meal_id_pk": {
+          "name": "ingredients_to_meals_ingredient_id_meal_id_pk",
+          "columns": [
+            "ingredient_id",
+            "meal_id"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "public.meals_to_plans": {
+      "name": "meals_to_plans",
+      "schema": "",
+      "columns": {
+        "meal_id": {
+          "name": "meal_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "plan_id": {
+          "name": "plan_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "meals_to_plans_meal_id_meals_id_fk": {
+          "name": "meals_to_plans_meal_id_meals_id_fk",
+          "tableFrom": "meals_to_plans",
+          "tableTo": "meals",
+          "columnsFrom": [
+            "meal_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "meals_to_plans_plan_id_plans_id_fk": {
+          "name": "meals_to_plans_plan_id_plans_id_fk",
+          "tableFrom": "meals_to_plans",
+          "tableTo": "plans",
+          "columnsFrom": [
+            "plan_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "meals_to_plans_meal_id_plan_id_pk": {
+          "name": "meals_to_plans_meal_id_plan_id_pk",
+          "columns": [
+            "meal_id",
+            "plan_id"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
