@@ -14,6 +14,8 @@ export const postgressRepository: PlanRepository = {
     }
   },
   create: async (plan: Plan): Promise<Plan> => {
+    console.log(typeof plan.dateStart);
+    
     try {
       const newIngredient = await db
         .insert(PlansTable)

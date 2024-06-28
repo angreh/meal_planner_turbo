@@ -8,6 +8,9 @@ import { IngredientEditPage } from "@/pages/ingredient/edit";
 import { MealListPage } from "@/pages/meal/list";
 import { MealCreatePage } from "@/pages/meal/create";
 import { MealEditPage } from "@/pages/meal/edit";
+import { PlanListPage } from "@/pages/plan/list";
+import { PlanCreatePage } from "@/pages/plan/create";
+import { PlanEditPage } from "@/pages/plan/edit";
 
 export const routes = createBrowserRouter([
   {
@@ -34,15 +37,14 @@ export const routes = createBrowserRouter([
         ],
       },
 
-      // { path: "plans", element: <PlanListPage /> },
-      // {
-      //   path: "plan",
-      //   children: [
-      //     { path: "create", element: <PlanCreatePage /> },
-      //     { path: ":id", element: <PlanEditPage /> },
-      //     { path: ":id/groceries", element: <Groceries /> },
-      //   ],
-      // },
+      { path: "plans", element: <PlanListPage /> },
+      {
+        path: "plan",
+        children: [
+          { path: "create", element: <PlanCreatePage /> },
+          { path: ":id", element: <PlanEditPage /> },
+        ],
+      },
     ],
   },
 ]);

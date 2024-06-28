@@ -19,8 +19,11 @@ export const list: Handler = async (_, res) => {
 
 export const create: Handler = async (req, res) => {
   try {
-    const plan = req.body as Plan;
-    const newPlan = await planRepository.create(plan);
+    const plan = req.body;
+    const newPlan = await planRepository.create({
+      dateStart: new Date(plan.dateStart),
+      dateEnd: new Date(plan.dateEnd),
+    } as Plan);
 
     res.reply<Plan>(StatusCodes.CREATED, newPlan);
   } catch (error) {
@@ -41,8 +44,12 @@ export const get: Handler = async (req, res) => {
 
 export const edit: Handler = async (req, res) => {
   try {
-    const Plan = req.body as Plan;
-    const newPlan = await planRepository.edit(Plan);
+    const plan = req.body;
+    const newPlan = await planRepository.edit({
+      id: plan.id,
+      dateStart: new Date(plan.dateStart),
+      dateEnd: new Date(plan.dateEnd),
+    } as Plan);
 
     res.reply<Plan>(StatusCodes.OK, newPlan);
   } catch (error) {
