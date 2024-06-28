@@ -1,5 +1,6 @@
 import { IngredientsTable } from "@/database/schemas";
-import { Ingredient, IngredientRepository } from "./Ingredients";
+import { IngredientRepository } from "./ingredients";
+import { Ingredient } from "shared-types";
 import { db } from "@/database/client";
 import { asc, eq } from "drizzle-orm";
 
@@ -48,7 +49,7 @@ export const postgressRepository: IngredientRepository = {
         .set({
           name: ingredient.name,
         })
-        .where(eq(IngredientsTable.id, ingredient.id))
+        .where(eq(IngredientsTable.id, ingredient.id as any))
         .returning();
 
       return result[0] as Ingredient;

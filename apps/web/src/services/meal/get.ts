@@ -2,15 +2,15 @@ import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { ReplyResponseType } from "shared-types";
 import { StatusCodes } from "http-status-codes";
-import { Ingredient } from "shared-types";
+import { Meal } from "shared-types";
 import axios from "axios";
 
-import { useIngredientStore } from "@/stores/ingredient";
+import { useMealStore } from "@/stores/meal";
 
-export const get = async (id: string): Promise<Ingredient> => {
+export const get = async (id: string): Promise<Meal> => {
   try {
-    const result = await axios.get<ReplyResponseType<Ingredient>>(
-      "http://localhost:3000/ingredient/" + id
+    const result = await axios.get<ReplyResponseType<Meal>>(
+      "http://localhost:3000/meal/" + id
     );
 
     if (result.status === StatusCodes.OK) {
@@ -20,21 +20,21 @@ export const get = async (id: string): Promise<Ingredient> => {
     throw new Error((error as any).message);
   }
 
-  return {} as Ingredient;
+  return {} as Meal;
 };
 
 export const useGet = (id: string) => {
-  const { setIngredientProperty } = useIngredientStore();
+  const { setMealProperty } = useMealStore();
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["getIngredient", id],
+    queryKey: ["getMeal", id],
     queryFn: async () => await get(id),
   });
 
   useEffect(() => {
     if (data) {
-      setIngredientProperty("name", data.name);
-      setIngredientProperty("id", data.id!);
+      setMealProperty("name", data.name);
+      setMealProperty("id", data.id!);
     }
   }, [data]);
 

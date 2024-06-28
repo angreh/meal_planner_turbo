@@ -3,21 +3,21 @@ import { useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useIngredientStore } from "@/stores/ingredient";
+import { useMealStore } from "@/stores/meal";
 
 export const CreateEditForm = () => {
-  const { ingredient, setIngredientProperty, resetIngredient } =
-    useIngredientStore();
+  const { meal, setMealProperty, resetMeal } =
+    useMealStore();
 
   useEffect(() => {
-    resetIngredient();
+    resetMeal();
   }, []);
 
   return (
     <>
       <Card>
         <CardHeader>
-          <CardTitle>Ingredient</CardTitle>
+          <CardTitle>Meal</CardTitle>
         </CardHeader>
 
         <CardContent>
@@ -27,8 +27,8 @@ export const CreateEditForm = () => {
               <Input
                 type="text"
                 name="name"
-                value={ingredient.name}
-                onChange={(e) => setIngredientProperty("name", e.target.value)}
+                value={meal.name}
+                onChange={(e) => setMealProperty("name", e.target.value)}
               />
             </div>
           </div>

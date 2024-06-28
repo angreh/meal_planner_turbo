@@ -2,14 +2,14 @@ import { ReplyResponseType } from "shared-types";
 import axios from "axios";
 import { UseMutationResult, useMutation } from "@tanstack/react-query";
 
-import { Ingredient } from "shared-types";
-import { useIngredientStore } from "@/stores/ingredient";
+import { Meal } from "shared-types";
+import { useMealStore } from "@/stores/meal";
 
-export const create = async (ingredient: Ingredient): Promise<boolean> => {
+export const create = async (meal: Meal): Promise<boolean> => {
 	try {
-		const result = await axios.post<ReplyResponseType<Ingredient>>(
-			"http://localhost:3000/ingredient",
-			ingredient,
+		const result = await axios.post<ReplyResponseType<Meal>>(
+			"http://localhost:3000/meal",
+			meal,
 		);
 
 		if (result.status === 201) {
@@ -23,13 +23,13 @@ export const create = async (ingredient: Ingredient): Promise<boolean> => {
 };
 
 export const useCreate = (): UseMutationResult<boolean, Error, void, unknown> => {
-	const { ingredient } = useIngredientStore();
+	const { meal } = useMealStore();
 
 	return useMutation<boolean>({
-		mutationKey: ["createIngredient", ingredient.name],
+		mutationKey: ["createMeal", meal.name],
 		mutationFn: async () => {
 			return await create({
-				name: ingredient.name,
+				name: meal.name,
 			});
 		},
 	});

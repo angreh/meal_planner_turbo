@@ -1,16 +1,16 @@
 import { ReplyResponseType } from "shared-types";
 import { UseMutationResult, useMutation } from "@tanstack/react-query";
-import { Ingredient } from "shared-types";
+import { Meal } from "shared-types";
 import axios from "axios";
 
-import { useIngredientStore } from "@/stores/ingredient";
+import { useMealStore } from "@/stores/meal";
 import { StatusCodes } from "http-status-codes";
 
-export const edit = async (ingredient: Ingredient): Promise<boolean> => {
+export const edit = async (meal: Meal): Promise<boolean> => {
   try {
-    const result = await axios.put<ReplyResponseType<Ingredient>>(
-      "http://localhost:3000/ingredient",
-      ingredient
+    const result = await axios.put<ReplyResponseType<Meal>>(
+      "http://localhost:3000/meal",
+      meal
     );
 
     if (result.status === StatusCodes.OK) {
@@ -24,10 +24,10 @@ export const edit = async (ingredient: Ingredient): Promise<boolean> => {
 };
 
 export const useEdit = (): UseMutationResult<boolean, Error, void, unknown> => {
-  const { ingredient } = useIngredientStore();
+  const { meal } = useMealStore();
 
   return useMutation<boolean>({
-    mutationKey: ["editIngredient", ingredient.name],
-    mutationFn: async () => await edit(ingredient),
+    mutationKey: ["editMeal", meal.name],
+    mutationFn: async () => await edit(meal),
   });
 };
