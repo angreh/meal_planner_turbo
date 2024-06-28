@@ -15,10 +15,6 @@ app
   .use(responseHandler)
   .use("/ingredient", ingredientRouter);
 
-// app.get("/", (req: Request, res: Response) => {
-//   res.json({ text: "Hello from the API!" });
-// });
-
 const port = +(process.env.API_PORT ?? 3000);
 
 app.listen(port, () => {

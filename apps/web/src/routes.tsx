@@ -4,6 +4,7 @@ import { RootLayout } from "@/layouts/root";
 import { HomePage } from "@/pages/home";
 import { IngredientListPage } from "@/pages/ingredient/list";
 import { IngredientCreatePage } from "@/pages/ingredient/create";
+import { IngredientEditPage } from "@/pages/ingredient/edit";
 
 export const routes = createBrowserRouter([
   {
@@ -17,7 +18,7 @@ export const routes = createBrowserRouter([
         path: "ingredient",
         children: [
           { path: "create", element: <IngredientCreatePage /> },
-          // { path: ":id", element: <IngredientEditPage /> },
+          { path: ":id", element: <IngredientEditPage /> },
         ],
       },
 

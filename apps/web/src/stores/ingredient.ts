@@ -1,6 +1,5 @@
 import { create } from "zustand";
-
-import { Ingredient } from "@/types/ingredient";
+import { Ingredient } from "shared-types";
 
 type IngredientProperty = "id" | "name";
 
@@ -14,9 +13,11 @@ interface ingredientState {
   addIngredient: () => void;
 
   resetIngredients: () => void;
+  resetIngredient: () => void;
 }
 
 export const useIngredientStore = create<ingredientState>((set) => ({
+  // data
   ingredient: {
     id: undefined,
     name: "",
@@ -24,6 +25,7 @@ export const useIngredientStore = create<ingredientState>((set) => ({
   },
   ingredients: [],
 
+  // actions
   setIngredient: (ingredient: Ingredient) => set({ ingredient }),
   setIngredientProperty: (key: IngredientProperty, value: string) => {
     set((prev) => ({
@@ -34,8 +36,7 @@ export const useIngredientStore = create<ingredientState>((set) => ({
   setIngredients: (ingredients: Ingredient[]) => set({ ingredients }),
   addIngredient: () => {
     set((prev) => {
-      prev.ingredient.id = Math.random();
-      prev.ingredient.isNew = true;
+      prev.ingredient.id = String(Math.random());
 
       return {
         ...prev,
@@ -44,5 +45,7 @@ export const useIngredientStore = create<ingredientState>((set) => ({
     });
   },
 
+  // utils
   resetIngredients: () => set({ ingredients: [] }),
+  resetIngredient: () => set({ ingredient: { id: undefined, name: "" } }),
 }));

@@ -1,9 +1,8 @@
-import axios from "axios";
 import { UseQueryResult, useQuery } from "@tanstack/react-query";
 import { ReplyResponseType } from "shared-types";
 import { StatusCodes } from "http-status-codes";
-
-import { Ingredient } from "@/types/ingredient";
+import { Ingredient } from "shared-types";
+import axios from "axios";
 
 export const list = async (): Promise<Ingredient[]> => {
   try {

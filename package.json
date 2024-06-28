@@ -5,7 +5,9 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "db:up": "cd infra/db && docker compose up -d",
+    "db:down": "cd infra/db && docker compose down"
   },
   "devDependencies": {
     "prettier": "^3.2.5",

@@ -1,10 +1,17 @@
+import { useEffect } from "react";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useIngredientStore } from "@/stores/ingredient";
 
 export const CreateEditForm = () => {
-  const { ingredient, setIngredientProperty } = useIngredientStore();
+  const { ingredient, setIngredientProperty, resetIngredient } =
+    useIngredientStore();
+
+  useEffect(() => {
+    resetIngredient();
+  }, []);
 
   return (
     <>
