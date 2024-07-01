@@ -8,6 +8,7 @@ import { IngredientEditPage } from "@/pages/ingredient/edit";
 import { MealListPage } from "@/pages/meal/list";
 import { MealCreatePage } from "@/pages/meal/create";
 import { MealEditPage } from "@/pages/meal/edit";
+import { MealIngredientsPage } from "@/pages/meal/ingredients";
 import { PlanListPage } from "@/pages/plan/list";
 import { PlanCreatePage } from "@/pages/plan/create";
 import { PlanEditPage } from "@/pages/plan/edit";
@@ -34,6 +35,7 @@ export const routes = createBrowserRouter([
         children: [
           { path: "create", element: <MealCreatePage /> },
           { path: ":id", element: <MealEditPage /> },
+          { path: ":id/ingredients", element: <MealIngredientsPage /> },
         ],
       },
 
