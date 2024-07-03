@@ -7,9 +7,19 @@ export const HomeContent = () => {
   const navigate = useNavigate();
 
   return (
-    <ActionHolder>
-      <Button onClick={() => navigate("/plans")}>Plans</Button>
-      <Button onClick={() => navigate("/meals")}>Meals</Button>
-    </ActionHolder>
+    <>
+      <Button className="mb-4 w-full" onClick={() => navigate("/plans")}>
+        Plans
+      </Button>
+
+      <ActionHolder>
+        <Button onClick={() => navigate("/meals")} variant="outline">
+          Meals
+        </Button>
+        <Button onClick={() => navigate("/ingredients")} variant="outline">
+          Ingredients
+        </Button>
+      </ActionHolder>
+    </>
   );
 };
