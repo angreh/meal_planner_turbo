@@ -78,14 +78,25 @@ export const CreateEditForm = () => {
               />
             </PopoverContent>
           </Popover>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Meal List</CardTitle>
+        </CardHeader>
+
+        <CardContent>
           <MealList />
           <Button
+          className="mt-4 w-full"
             variant="outline"
             onClick={() => navigate(`/plan/${plan.id}/meals`)}>
             Add Meal
           </Button>
         </CardContent>
       </Card>
+
       <Button
         onClick={() => navigate(`/plan/${plan.id}/groceries`)}
         variant="outline"

@@ -14,6 +14,7 @@ import { useList } from "@/services/ingredient/list";
 import { create } from "@/services/ingredient/create";
 import { useIngredientStore } from "@/stores/ingredient";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export const MealIngredientsPage = () => {
   const { data } = useList();
@@ -51,30 +52,39 @@ export const MealIngredientsPage = () => {
 
   return (
     <>
-      <Command>
-        <CommandInput
-          placeholder="Type a ingredient name"
-          value={search}
-          onValueChange={setSearch}
-        />
-        <CommandList>
-          <CommandEmpty>
-            Create a new ingredient "{search}" -{" "}
-            <span onClick={createHandler}>Create</span>
-          </CommandEmpty>
+      <Card>
+        <CardHeader>
+          <CardTitle>Meal Ingredients</CardTitle>
+        </CardHeader>
 
-          <CommandGroup heading="Meals">
-            {data?.map((ingredient) => (
-              <CommandItem key={ingredient.id} value={ingredient.name}>
-                {ingredient.name}
-                <span className="ml-2 text-gray-700">#{ingredient.id}</span>
-                <span onClick={() => addHandler(ingredient.id!)}>add</span>
-              </CommandItem>
-            ))}
-          </CommandGroup>
-        </CommandList>
-      </Command>
-      <Button onClick={backHandler} variant="outline">
+        <CardContent>
+          <Command>
+            <CommandInput
+              placeholder="Type a ingredient name"
+              value={search}
+              onValueChange={setSearch}
+            />
+            <CommandList>
+              <CommandEmpty>
+                Create a new ingredient "{search}" -{" "}
+                <span onClick={createHandler}>Create</span>
+              </CommandEmpty>
+
+              <CommandGroup heading="Meals">
+                {data?.map((ingredient) => (
+                  <CommandItem key={ingredient.id} value={ingredient.name}>
+                    {ingredient.name}
+                    <span className="ml-2 text-gray-700">#{ingredient.id}</span>
+                    <span onClick={() => addHandler(ingredient.id!)}>add</span>
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+            </CommandList>
+          </Command>
+        </CardContent>
+      </Card>
+
+      <Button onClick={backHandler} variant="outline" className="w-full mt-4">
         Back
       </Button>
     </>

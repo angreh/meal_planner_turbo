@@ -13,11 +13,10 @@ export const IngredientList = () => {
 
   return (
     <div>
-      <div>Ingredient List</div>
-      <ul>
+      <ul className="list-disc list-inside pl-4">
         {ingredients?.length &&
           ingredients.map((ingredient: any) => (
-            <li key={ingredient.id}>- {ingredient.name}</li>
+            <li key={ingredient.id}>{ingredient.name}</li>
           ))}
       </ul>
     </div>

@@ -15,7 +15,7 @@ export const MealListList = () => {
 
       <CardContent>
         {data && (
-          <ul>
+          <ul className="list-disc list-inside pl-4">
             {data.map((meal: any) => (
               <li key={meal.id}>
                 <NavLink to={`/meal/${meal.id}`}>{meal.name}</NavLink>

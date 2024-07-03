@@ -13,11 +13,10 @@ export const MealList = () => {
 
   return (
     <div>
-      <div>Meal List</div>
-      <ul>
+      <ul className="list-disc list-inside pl-4">
         {meals?.length &&
           meals.map((meal: any) => (
-            <li key={meal.id}>- {meal.name}</li>
+            <li key={meal.id}>{meal.name}</li>
           ))}
       </ul>
     </div>

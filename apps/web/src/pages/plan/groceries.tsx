@@ -1,14 +1,16 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-import { Card, CardContent, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PageHolder } from "@/components/ui/pageHolder";
 import { Ingredient } from "shared-types";
+import { Button } from "@/components/ui/button";
 
 export const PlanGroceriesPage = () => {
   const { id } = useParams();
   const [ingredients, setIngredients] = useState<Ingredient[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!id) return;
@@ -22,16 +24,25 @@ export const PlanGroceriesPage = () => {
   return (
     <PageHolder>
       <Card>
-        <CardTitle>Groceries</CardTitle>
+        <CardHeader>
+          <CardTitle>Groceries</CardTitle>
+        </CardHeader>
 
         <CardContent>
-          <ul>
-            {ingredients.length && ingredients.map((ingredient) => (
-              <li key={ingredient.id}>- {ingredient.name}</li>
-            ))}
+          <ul className="list-disc list-inside pl-4">
+            {ingredients.length &&
+              ingredients.map((ingredient) => (
+                <li key={ingredient.id}>{ingredient.name}</li>
+              ))}
           </ul>
         </CardContent>
       </Card>
+      <Button
+        variant="outline"
+        className="w-full"
+        onClick={() => navigate(`/plan/${id}`)}>
+        Back
+      </Button>
     </PageHolder>
   );
 };

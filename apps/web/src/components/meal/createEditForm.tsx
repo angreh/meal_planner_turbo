@@ -34,9 +34,20 @@ export const CreateEditForm = () => {
                 onChange={(e) => setMealProperty("name", e.target.value)}
               />
             </div>
-            <IngredientList />
           </div>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Ingredient List</CardTitle>
+        </CardHeader>
+
+        <CardContent>
+          <IngredientList />
+
           <Button
+            className="mt-4 w-full"
             variant="outline"
             onClick={() => navigate(`/meal/${meal.id}/ingredients`)}>
             Add Ingredient
