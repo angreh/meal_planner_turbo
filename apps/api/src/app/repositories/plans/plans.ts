@@ -1,4 +1,4 @@
-import { Meal, Plan } from "shared-types";
+import { Ingredient, Meal, Plan } from "shared-types";
 
 export interface PlanRepository {
   list(): Promise<Plan[]>;
@@ -9,4 +9,7 @@ export interface PlanRepository {
   // meals
   addMeal(planId: string, mealId: string): Promise<boolean>;
   listMeals(planId: string): Promise<Meal[]>;
+
+  // groceries
+  listIngredients(planId: string): Promise<Ingredient[]>;
 }

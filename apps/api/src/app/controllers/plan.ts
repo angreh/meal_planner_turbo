@@ -1,6 +1,6 @@
 import { Handler } from "express";
 import { StatusCodes } from "http-status-codes";
-import { Meal, Plan } from "shared-types";
+import { Ingredient, Meal, Plan } from "shared-types";
 
 import { PlanRepository } from "@/app/repositories/plans/plans";
 import { postgressRepository as defaultRepo } from "@/app/repositories/plans/plansPostGres";
@@ -75,6 +75,17 @@ export const listMeals: Handler = async (req, res) => {
     const meals = await planRepository.listMeals(planId);
 
     res.reply<Meal[]>(StatusCodes.OK, meals);
+  } catch (error) {
+    res.reply<Error>(StatusCodes.INTERNAL_SERVER_ERROR, error);
+  }
+};
+
+export const listIngredients: Handler = async (req, res) => {
+  try {
+    const planId = req.params.id as string;
+    const ingredients = await planRepository.listIngredients(planId);
+
+    res.reply<Ingredient[]>(StatusCodes.OK, ingredients);
   } catch (error) {
     res.reply<Error>(StatusCodes.INTERNAL_SERVER_ERROR, error);
   }

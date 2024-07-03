@@ -86,6 +86,12 @@ export const CreateEditForm = () => {
           </Button>
         </CardContent>
       </Card>
+      <Button
+        onClick={() => navigate(`/plan/${plan.id}/groceries`)}
+        variant="outline"
+        className="w-full">
+        See Groceries List
+      </Button>
     </>
   );
 };

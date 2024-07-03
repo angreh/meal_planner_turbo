@@ -7,6 +7,7 @@ import {
   edit,
   addMeal,
   listMeals,
+  listIngredients,
 } from "../controllers/plan";
 
 const router = Router();
@@ -19,5 +20,8 @@ router.put("/", edit);
 // meals
 router.get("/:id/meals", listMeals);
 router.put("/:id/meal", addMeal);
+
+// groceries
+router.get("/:id/groceries", listIngredients);
 
 export default router;

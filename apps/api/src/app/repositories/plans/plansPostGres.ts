@@ -1,7 +1,13 @@
-import { Meal, Plan } from "shared-types";
+import { Ingredient, Meal, Plan } from "shared-types";
 import { eq } from "drizzle-orm";
 
-import { MealsTable, PlansTable, mealsToPlans } from "@/database/schemas";
+import {
+  IngredientsTable,
+  MealsTable,
+  PlansTable,
+  ingredientsToMeals,
+  mealsToPlans,
+} from "@/database/schemas";
 import { PlanRepository } from "./plans";
 import { db } from "@/database/client";
 
@@ -75,6 +81,30 @@ export const postgressRepository: PlanRepository = {
         .innerJoin(MealsTable, eq(mealsToPlans.mealId, MealsTable.id));
 
       return result as Meal[];
+    } catch (error) {
+      throw new Error((error as Error).message);
+    }
+  },
+  listIngredients: async (planId: string): Promise<Ingredient[]> => {
+    try {
+      const result = await db
+        .select({
+          id: IngredientsTable.id,
+          name: IngredientsTable.name,
+        })
+        .from(mealsToPlans)
+        .innerJoin(
+          ingredientsToMeals,
+          eq(ingredientsToMeals.mealId, mealsToPlans.mealId)
+        )
+        .innerJoin(
+          IngredientsTable,
+          eq(IngredientsTable.id, ingredientsToMeals.ingredientId)
+        )
+        .where(eq(mealsToPlans.planId, planId))
+        .groupBy(IngredientsTable.id);
+
+      return result as Ingredient[];
     } catch (error) {
       throw new Error((error as Error).message);
     }
