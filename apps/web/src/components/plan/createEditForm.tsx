@@ -2,6 +2,7 @@ import { useState } from "react";
 import { CalendarIcon } from "lucide-react";
 import { addDays, format } from "date-fns";
 import { DateRange } from "react-day-picker";
+import { useNavigate } from "react-router-dom";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { usePlanStore } from "@/stores/plan";
@@ -13,8 +14,10 @@ import {
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
+import { MealList } from "./mealList";
 
 export const CreateEditForm = () => {
+  const navigate = useNavigate();
   const { setPlanProperty, plan } = usePlanStore();
   const [date, setDate] = useState<DateRange | undefined>({
     from: new Date(plan.dateStart || "2022-01-01"),
@@ -75,6 +78,12 @@ export const CreateEditForm = () => {
               />
             </PopoverContent>
           </Popover>
+          <MealList />
+          <Button
+            variant="outline"
+            onClick={() => navigate(`/plan/${plan.id}/meals`)}>
+            Add Meal
+          </Button>
         </CardContent>
       </Card>
     </>

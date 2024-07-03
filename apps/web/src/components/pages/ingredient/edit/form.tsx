@@ -5,9 +5,10 @@ import { useGet } from "@/services/ingredient/get";
 
 export const IngredientEditForm = () => {
   const { id } = useParams();
-  const { isError } = useGet(id!);
+  const { isError, isLoading } = useGet(id!);
 
   if (isError) return <div>Error</div>;
+  if (isLoading) return <div>Loading...</div>;
 
   return <CreateEditForm />;
 };

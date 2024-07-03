@@ -12,13 +12,9 @@ export const CreateEditForm = () => {
   const { meal, setMealProperty, resetMeal } = useMealStore();
   const navigate = useNavigate();
 
-  const isLoaded = (): boolean => {
-    return !!meal.id;
-  }
-
   useEffect(() => {
     resetMeal();
-  }, []);
+  }, [resetMeal]);
 
   return (
     <>
@@ -29,18 +25,22 @@ export const CreateEditForm = () => {
 
         <CardContent>
           <div className="space-y-4">
-          <div>
-            <Label htmlFor="name">Name</Label>
-            <Input
-              type="text"
-              name="name"
-              value={meal.name}
-              onChange={(e) => setMealProperty("name", e.target.value)}
-            />
+            <div>
+              <Label htmlFor="name">Name</Label>
+              <Input
+                type="text"
+                name="name"
+                value={meal.name}
+                onChange={(e) => setMealProperty("name", e.target.value)}
+              />
+            </div>
+            <IngredientList />
           </div>
-          {isLoaded() && <IngredientList />}
-          </div>
-          <Button variant="outline" onClick={()=>navigate(`/meal/${meal.id}/ingredients`)}>Add Ingredient</Button>
+          <Button
+            variant="outline"
+            onClick={() => navigate(`/meal/${meal.id}/ingredients`)}>
+            Add Ingredient
+          </Button>
         </CardContent>
       </Card>
     </>

@@ -1,7 +1,7 @@
-import { Plan } from "shared-types";
+import { Meal, Plan } from "shared-types";
 import { eq } from "drizzle-orm";
 
-import { PlansTable } from "@/database/schemas";
+import { MealsTable, PlansTable, mealsToPlans } from "@/database/schemas";
 import { PlanRepository } from "./plans";
 import { db } from "@/database/client";
 
@@ -15,7 +15,7 @@ export const postgressRepository: PlanRepository = {
   },
   create: async (plan: Plan): Promise<Plan> => {
     console.log(typeof plan.dateStart);
-    
+
     try {
       const newIngredient = await db
         .insert(PlansTable)
@@ -50,6 +50,31 @@ export const postgressRepository: PlanRepository = {
         .returning();
 
       return result[0] as Plan;
+    } catch (error) {
+      throw new Error((error as Error).message);
+    }
+  },
+  addMeal: async (planId: string, mealId: string): Promise<boolean> => {
+    try {
+      await db.insert(mealsToPlans).values({ planId, mealId });
+
+      return true;
+    } catch (_) {
+      return false;
+    }
+  },
+  listMeals: async (planId: string): Promise<Meal[]> => {
+    try {
+      const result: unknown = await db
+        .select({
+          id: MealsTable.id,
+          name: MealsTable.name,
+        })
+        .from(mealsToPlans)
+        .where(eq(mealsToPlans.planId, planId))
+        .innerJoin(MealsTable, eq(mealsToPlans.mealId, MealsTable.id));
+
+      return result as Meal[];
     } catch (error) {
       throw new Error((error as Error).message);
     }

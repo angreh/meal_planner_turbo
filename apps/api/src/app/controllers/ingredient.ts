@@ -4,7 +4,7 @@ import { Ingredient } from "shared-types";
 
 import {
   IngredientRepository,
-} from "@/app/repositories/ingredients/Ingredients";
+} from "@/app/repositories/ingredients/ingredients";
 import { postgressRepository as defaultRepo } from "@/app/repositories/ingredients/ingredientsPostGres";
 
 const ingredientRepository: IngredientRepository = defaultRepo;

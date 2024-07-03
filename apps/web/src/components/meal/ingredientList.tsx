@@ -1,20 +1,22 @@
+import { useParams } from "react-router-dom";
+
 import { useListIngredients } from "@/services/meal/ingredients";
-import { useMealStore } from "@/stores/meal";
+import { useIngredientStore } from "@/stores/ingredient";
 
 export const IngredientList = () => {
-  const { data } = useListIngredients();
-  const { meal } = useMealStore();
+  const { id: mealId } = useParams();
+  const { ingredients } = useIngredientStore();
+  const { isLoading, isError } = useListIngredients(mealId!);
 
-  const isLoaded = (): boolean => {
-    return !!meal.id;
-  }
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Error</div>;
 
   return (
     <div>
       <div>Ingredient List</div>
       <ul>
-        {(isLoaded() && data?.length) &&
-          data.map((ingredient) => (
+        {ingredients?.length &&
+          ingredients.map((ingredient: any) => (
             <li key={ingredient.id}>- {ingredient.name}</li>
           ))}
       </ul>

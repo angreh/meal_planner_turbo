@@ -12,6 +12,7 @@ import { MealIngredientsPage } from "@/pages/meal/ingredients";
 import { PlanListPage } from "@/pages/plan/list";
 import { PlanCreatePage } from "@/pages/plan/create";
 import { PlanEditPage } from "@/pages/plan/edit";
+import { PlanMealsPage } from "@/pages/plan/meals";
 
 export const routes = createBrowserRouter([
   {
@@ -45,6 +46,7 @@ export const routes = createBrowserRouter([
         children: [
           { path: "create", element: <PlanCreatePage /> },
           { path: ":id", element: <PlanEditPage /> },
+          { path: ":id/meals", element: <PlanMealsPage /> },
         ],
       },
     ],

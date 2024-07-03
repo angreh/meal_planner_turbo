@@ -1,17 +1,17 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { StatusCodes } from "http-status-codes";
-import { Ingredient, ReplyResponseType } from "shared-types";
+import { Meal, ReplyResponseType } from "shared-types";
 import { useQuery } from "@tanstack/react-query";
 
-import { useIngredientStore } from "@/stores/ingredient";
+import { useMealStore } from "@/stores/meal";
 
-export const listIngredients = async (
+export const listMeals = async (
   mealId: string
-): Promise<Ingredient[]> => {
+): Promise<Meal[]> => {
   try {
-    const result = await axios.get<ReplyResponseType<Ingredient[]>>(
-      `http://localhost:3000/meal/${mealId}/ingredients`
+    const result = await axios.get<ReplyResponseType<Meal[]>>(
+      `http://localhost:3000/plan/${mealId}/meals`
     );
 
     if (result.status === StatusCodes.OK) {
@@ -24,17 +24,17 @@ export const listIngredients = async (
   return [];
 };
 
-export const useListIngredients = (mealId: string) => {
-  const { setIngredients } = useIngredientStore();
+export const useListMeals = (mealId: string) => {
+  const { setMeals } = useMealStore();
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["meals"],
-    queryFn: async () => listIngredients(mealId),
+    queryFn: async () => listMeals(mealId),
   });
 
   useEffect(() => {
     if (data) {
-      setIngredients(data);
+      setMeals(data);
     }
   }, [data]);
 
