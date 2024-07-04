@@ -37,3 +37,6 @@ yarn-error.log*
 .DS_Store
 *.pem
 db-data
+
+index.js
+index_es3.js
