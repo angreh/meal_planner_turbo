@@ -1,10 +1,9 @@
-import { ReplyResponseType } from "shared-types";
-import { UseMutationResult, useMutation } from "@tanstack/react-query";
-import { Meal } from "shared-types";
 import axios from "axios";
+import { ReplyResponseType, Meal } from "shared-types";
+import { StatusCodes } from "http-status-codes";
+import { UseMutationResult, useMutation } from "@tanstack/react-query";
 
 import { useMealStore } from "@/stores/meal";
-import { StatusCodes } from "http-status-codes";
 
 export const edit = async (meal: Meal): Promise<boolean> => {
   try {

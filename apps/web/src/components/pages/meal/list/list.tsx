@@ -1,11 +1,15 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useList } from "@/services/meal/list";
 import { NavLink } from "react-router-dom";
 
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useList } from "@/services/meal/list";
+import { useMealStore } from "@/stores/meal";
+
 export const MealListList = () => {
-  const { data, isError } = useList();
+  const { isLoading, isError } = useList();
+  const { meals: data } = useMealStore();
 
   if (isError) return <div>Error</div>;
+  if (isLoading) return <div>Loading</div>;
 
   return (
     <Card>

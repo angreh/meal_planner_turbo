@@ -1,11 +1,15 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useList } from "@/services/ingredient/list";
 import { NavLink } from "react-router-dom";
 
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useList } from "@/services/ingredient/list";
+import { useIngredientStore } from "@/stores/ingredient";
+
 export const IngredientListList = () => {
-  const { data, isError } = useList();
+  const { isLoading, isError } = useList();
+  const { ingredients } = useIngredientStore();
 
   if (isError) return <div>Error</div>;
+  if (isLoading) return <div>Loading</div>;
 
   return (
     <Card>
@@ -14,16 +18,16 @@ export const IngredientListList = () => {
       </CardHeader>
 
       <CardContent>
-        {data && (
+        {ingredients?.length && (
           <ul className="list-disc list-inside pl-4">
-            {data.map((meal: any) => (
+            {ingredients.map((meal: any) => (
               <li key={meal.id}>
                 <NavLink to={`/ingredient/${meal.id}`}>{meal.name}</NavLink>
               </li>
             ))}
           </ul>
         )}
-        {(!data || !data.length) && <div>No meals</div>}
+        {(!ingredients || !ingredients.length) && <div>No meals</div>}
       </CardContent>
     </Card>
   );

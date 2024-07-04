@@ -1,10 +1,9 @@
-import { ReplyResponseType } from "shared-types";
-import { UseMutationResult, useMutation } from "@tanstack/react-query";
-import { Ingredient } from "shared-types";
 import axios from "axios";
+import { ReplyResponseType, Ingredient } from "shared-types";
+import { StatusCodes } from "http-status-codes";
+import { UseMutationResult, useMutation } from "@tanstack/react-query";
 
 import { useIngredientStore } from "@/stores/ingredient";
-import { StatusCodes } from "http-status-codes";
 
 export const edit = async (ingredient: Ingredient): Promise<boolean> => {
   try {

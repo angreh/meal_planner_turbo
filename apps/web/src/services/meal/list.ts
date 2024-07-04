@@ -1,8 +1,10 @@
-import { UseQueryResult, useQuery } from "@tanstack/react-query";
-import { ReplyResponseType } from "shared-types";
-import { StatusCodes } from "http-status-codes";
-import { Meal } from "shared-types";
 import axios from "axios";
+import { useEffect } from "react";
+import { ReplyResponseType, Meal } from "shared-types";
+import { StatusCodes } from "http-status-codes";
+import { useQuery } from "@tanstack/react-query";
+
+import { useMealStore } from "@/stores/meal";
 
 export const list = async (): Promise<Meal[]> => {
   try {
@@ -20,9 +22,19 @@ export const list = async (): Promise<Meal[]> => {
   return [];
 };
 
-export const useList = (): UseQueryResult<Meal[], Error> => {
-  return useQuery({
+export const useList = () => {
+  const { setMeals } = useMealStore();
+
+  const { data, isLoading, isError } = useQuery({
     queryKey: ["meals"],
     queryFn: list,
   });
+
+  useEffect(() => {
+    if (data) {
+      setMeals(data);
+    }
+  }, [data]);
+
+  return { isLoading, isError };
 };

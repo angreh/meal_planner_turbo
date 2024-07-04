@@ -1,8 +1,10 @@
-import { UseQueryResult, useQuery } from "@tanstack/react-query";
-import { ReplyResponseType } from "shared-types";
-import { StatusCodes } from "http-status-codes";
-import { Plan } from "shared-types";
 import axios from "axios";
+import { useEffect } from "react";
+import { ReplyResponseType, Plan } from "shared-types";
+import { StatusCodes } from "http-status-codes";
+import { useQuery } from "@tanstack/react-query";
+
+import { usePlanStore } from "@/stores/plan";
 
 export const list = async (): Promise<Plan[]> => {
   try {
@@ -20,9 +22,19 @@ export const list = async (): Promise<Plan[]> => {
   return [];
 };
 
-export const useList = (): UseQueryResult<Plan[], Error> => {
-  return useQuery({
+export const useList = () => {
+  const { setPlans } = usePlanStore();
+
+  const { data, isLoading, isError } = useQuery({
     queryKey: ["plans"],
     queryFn: list,
   });
+
+  useEffect(() => {
+    if (data) {
+      setPlans(data);
+    }
+  }, [data]);
+
+  return { isLoading, isError };
 };

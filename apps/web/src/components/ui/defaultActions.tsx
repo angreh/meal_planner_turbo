@@ -1,5 +1,5 @@
-import { ActionHolder } from "./actionHolder";
-import { Button } from "./button";
+import { ActionHolder } from "@/components/ui/actionHolder";
+import { Button } from "@/components/ui/button";
 
 type DefaultActionsProps = {
   saveFn: () => void;

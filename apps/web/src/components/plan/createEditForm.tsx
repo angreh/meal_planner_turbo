@@ -81,21 +81,7 @@ export const CreateEditForm = () => {
         </CardContent>
       </Card>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Meal List</CardTitle>
-        </CardHeader>
-
-        <CardContent>
-          <MealList />
-          <Button
-          className="mt-4 w-full"
-            variant="outline"
-            onClick={() => navigate(`/plan/${plan.id}/meals`)}>
-            Add Meal
-          </Button>
-        </CardContent>
-      </Card>
+      <MealList />
 
       <Button
         onClick={() => navigate(`/plan/${plan.id}/groceries`)}

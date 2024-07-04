@@ -1,9 +1,9 @@
+import axios from "axios";
 import { useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { ReplyResponseType } from "shared-types";
 import { StatusCodes } from "http-status-codes";
 import { Ingredient } from "shared-types";
-import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
 
 import { useIngredientStore } from "@/stores/ingredient";
 

@@ -1,8 +1,11 @@
-import { UseQueryResult, useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
 import { ReplyResponseType } from "shared-types";
 import { StatusCodes } from "http-status-codes";
 import { Ingredient } from "shared-types";
-import axios from "axios";
+
+import { useIngredientStore } from "@/stores/ingredient";
+import { useEffect } from "react";
 
 export const list = async (): Promise<Ingredient[]> => {
   try {
@@ -20,9 +23,19 @@ export const list = async (): Promise<Ingredient[]> => {
   return [];
 };
 
-export const useList = (): UseQueryResult<Ingredient[], Error> => {
-  return useQuery({
+export const useList = () => {
+  const { setIngredients } = useIngredientStore();
+
+  const { data, isLoading, isError } = useQuery({
     queryKey: ["ingredients"],
     queryFn: list,
   });
+
+  useEffect(() => {
+    if (data) {
+      setIngredients(data);
+    }
+  }, [data]);
+
+  return { isLoading, isError };
 };

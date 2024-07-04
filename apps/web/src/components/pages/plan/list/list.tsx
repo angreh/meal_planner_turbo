@@ -1,17 +1,20 @@
 import { Plan } from "shared-types";
 import { useNavigate } from "react-router-dom";
-
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useList } from "@/services/plan/list";
-import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
+import { CalendarIcon } from "lucide-react";
+
+import { useList } from "@/services/plan/list";
+import { usePlanStore } from "@/stores/plan";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export const PlanListList = () => {
   const navigate = useNavigate();
-  const { data, isError } = useList();
+  const { isLoading, isError } = useList();
+  const { plans: data } = usePlanStore();
 
   if (isError) return <div>Error</div>;
+  if (isLoading) return <div>Loading</div>;
 
   return (
     <Card>
